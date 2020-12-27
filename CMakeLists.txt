@@ -8,4 +8,7 @@ project(wankel VERSION 0.0.1 LANGUAGES C)
 
 set(WANKEL_THIRD_PARTY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/third_party")
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
+add_subdirectory(parser)
 add_subdirectory(cmd)
