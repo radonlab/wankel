@@ -6,10 +6,15 @@
 
 #include "parser/wk_state.h"
 
-typedef wk_state_t parser_state_t;
+void yyerror(parser_state_t* p, const char* s);
 %}
 
+%code requires {
+  #include "parser/wk_state.h"
+}
+
 %define api.pure full
+%parse-param {parser_state_t* p}
 
 %token NUM
 
@@ -31,4 +36,5 @@ statement
 %%
 
 void yyerror(parser_state_t* p, const char* s) {
+  printf(s);
 }

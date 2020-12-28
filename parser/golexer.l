@@ -3,10 +3,10 @@
  */
 %{
 
-enum wk_token_type {
+typedef enum wk_token_type {
   L_CURLY,
   R_CURLY,
-};
+} wk_token_type_t;
 
 %}
 
