@@ -16,7 +16,9 @@ void yyerror(parser_state_t* p, const char* s);
 %define api.pure full
 %parse-param {parser_state_t* p}
 
-%token NUM
+%token ASSIGN
+%token L_CURLY;
+%token R_CURLY;
 
 %%
 
@@ -30,7 +32,7 @@ statement_list
   ;
 
 statement
-  : NUM
+  : ASSIGN
   ;
 
 %%
