@@ -27,7 +27,7 @@ program
   ;
 
 statement_list
-  : /* empty */
+  : %empty
   | statement_list statement
   ;
 
