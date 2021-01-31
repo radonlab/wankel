@@ -5,7 +5,7 @@
 #include "parser/goparser.h"
 %}
 
-%option noyywrap
+%option reentrant bison-bridge noyywrap
 
 %%
 

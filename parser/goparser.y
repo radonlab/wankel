@@ -14,7 +14,8 @@ void yyerror(parser_state_t* p, const char* s);
 }
 
 %define api.pure full
-%parse-param {parser_state_t* p}
+%parse-param {void* p}
+%lex-param {void* p}
 
 %token ASSIGN
 %token L_CURLY;
@@ -39,4 +40,12 @@ statement
 
 void yyerror(parser_state_t* p, const char* s) {
   printf(s);
+}
+
+int wk_parse(parser_state_t* p, FILE* fp) {
+  yylex_init(&ps->lex);
+  yyset_in(fp, ps->lex);
+  yyparse(ps->lex);
+  yylex_destroy(ps->lex);
+  return 0;
 }
