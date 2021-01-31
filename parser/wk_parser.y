@@ -6,7 +6,7 @@
 
 #include "parser/wk_state.h"
 
-void yyerror(parser_state_t* p, const char* s);
+void yyerror(wk_lexer_t* lexer, const char* message);
 %}
 
 %code requires {
@@ -14,8 +14,8 @@ void yyerror(parser_state_t* p, const char* s);
 }
 
 %define api.pure full
-%parse-param {void* p}
-%lex-param {void* p}
+%parse-param {wk_lexer_t* lexer}
+%lex-param {wk_lexer_t* lexer}
 
 %token ASSIGN
 %token L_CURLY;
@@ -38,14 +38,14 @@ statement
 
 %%
 
-void yyerror(parser_state_t* p, const char* s) {
-  printf(s);
+void yyerror(wk_lexer_t* lexer, const char* message) {
+  printf(message);
 }
 
-int wk_parse(parser_state_t* p, FILE* fp) {
-  yylex_init(&ps->lex);
-  yyset_in(fp, ps->lex);
-  yyparse(ps->lex);
-  yylex_destroy(ps->lex);
+int wk_parse(wk_state_t* state, FILE* source) {
+  yylex_init(&state->lex);
+  yyset_in(source, state->lex);
+  yyparse(state->lex);
+  yylex_destroy(state->lex);
   return 0;
 }
